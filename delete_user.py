@@ -6,7 +6,7 @@ import pymysql
 from config.read_config import ReadConfig
 
 
-class clear_user:
+class DeleteUser:
     def __init__(self):
         cf = ReadConfig()
         self.host = cf.get('db', 'host')
@@ -19,14 +19,14 @@ class clear_user:
                                        charset='utf8')
         self.cur = self.connect.cursor()
 
-    def clear_user(self):
+    def delete_user(self):
         """清除数据库中用户代码以cs开头的用户数据"""
         sql = "DELETE FROM auth_user WHERE username LIKE 'cs%%'"
         self.cur.execute(sql)
-        self.connect.commit()   # 修改需要提交
+        self.connect.commit()   # 修改需要提交事务
 
 
 
 if __name__ == '__main__':
-    a = clear_user()
-    a.clear_user()
+    a = DeleteUser()
+    a.delete_user()
