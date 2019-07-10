@@ -40,7 +40,7 @@ class AddUser:
 
 if __name__ == '__main__':
     user = AddUser()
-    for i in range(1,3):
+    for i in range(1,5):
         user.add_user(i)
 
 

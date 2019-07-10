@@ -19,5 +19,5 @@ class ReadConfig():
 
 if __name__ == '__main__':
     rc = ReadConfig()
-    a = rc.get('login', 'address')
+    a = rc.get('db', 'host')
     print(a)
