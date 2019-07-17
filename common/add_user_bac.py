@@ -6,7 +6,7 @@ import hashlib
 import requests
 import json
 from config.read_config import ReadConfig
-from common.write_csv import WriteCsv
+
 
 class AddUser:
     def __init__(self):
@@ -24,25 +24,24 @@ class AddUser:
         print(res)
 
     def add_user(self, count):
-        for i in range(1,(count+1)):
-            url = self.cf.get('login','address') + '/syscenter/api/v1/auth/addUser'
-            # user = {}
-            params = {
-                "dtoUser": {
-                    "username": "cs" + str(i),
-                    "realname": "测试" + str(i),
-                    "password": "123456"
-                },
-                "drugIdList": [],
-                "roleIdList": [88, 91, 89],
-                "dtoUserDeptList": [],
-                "resourceIdList": [],
-                "dtoUserWorknumList": []
-            }
-            self.session.post(url, data=json.dumps(params), headers=self.headers).json()
+        url = self.cf.get('login','address') + '/syscenter/api/v1/auth/addUser'
+        params = {
+            "dtoUser": {
+                "username": "cs" + str(count),
+                "realname": "测试" + str(count),
+                "password": "123456"
+            },
+            "drugIdList": [],
+            "roleIdList": [88, 91, 89],
+            "dtoUserDeptList": [],
+            "resourceIdList": [],
+            "dtoUserWorknumList": []
+        }
+        res = self.session.post(url, data=json.dumps(params), headers=self.headers).json()
+        print(res)
 
 
 if __name__ == '__main__':
     user = AddUser()
-    user.add_user(5)
-
+    for i in range(1, 5):
+        user.add_user(i)
