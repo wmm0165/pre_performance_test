@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Time : 2019/7/17 16:25
 # @Author : wangmengmeng
-from add_user import AddUser
-from delete_user import DeleteUser
+from common.add_user import AddUser
+from common.delete_user import DeleteUser
 
 def run():
     deleteuser = DeleteUser()
