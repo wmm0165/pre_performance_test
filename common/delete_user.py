@@ -23,8 +23,7 @@ class DeleteUser:
         """清除数据库中用户代码以cs开头的用户数据"""
         sql = "DELETE FROM auth_user WHERE username LIKE 'cs%%'"
         self.cur.execute(sql)
-        self.connect.commit()   # 修改需要提交事务
-
+        self.connect.commit()  # 修改需要提交事务
 
 
 if __name__ == '__main__':
