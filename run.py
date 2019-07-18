@@ -9,8 +9,8 @@ def run():
     deleteuser.delete_user()
     num = int(input("请输入需要新增的用户数;"))
     adduser = AddUser()
-    for i in range(1, (num+1)):
-        adduser.add_user(i)
+    adduser.add_user(num)
+
 
 
 if __name__ == '__main__':

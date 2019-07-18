@@ -6,11 +6,12 @@ import hashlib
 import requests
 import json
 from config.read_config import ReadConfig
-from common.write_csv import WriteCsv
-
+import csv
+import os
 class AddUser:
     def __init__(self):
         self.cf = ReadConfig()
+        self.csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'users.csv')
         url = self.cf.get('login','address') + '/syscenter/api/v1/currentUser'
         username = self.cf.get('login','username')
         passwd = self.cf.get('login','password')
@@ -24,9 +25,12 @@ class AddUser:
         print(res)
 
     def add_user(self, count):
+        out = open(self.csv_path, 'w', newline='')  # 打开csv文件
+        write_csv = csv.writer(out, dialect='excel')  # 定义文件类型为excel类型
         for i in range(1,(count+1)):
             url = self.cf.get('login','address') + '/syscenter/api/v1/auth/addUser'
-            # user = {}
+            user = [("cs" + str(i)),"123456"]     # 用户名和密码
+            write_csv.writerow(user)
             params = {
                 "dtoUser": {
                     "username": "cs" + str(i),
@@ -40,6 +44,7 @@ class AddUser:
                 "dtoUserWorknumList": []
             }
             self.session.post(url, data=json.dumps(params), headers=self.headers).json()
+
 
 
 if __name__ == '__main__':
